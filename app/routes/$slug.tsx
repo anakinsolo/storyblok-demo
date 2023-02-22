@@ -1,10 +1,12 @@
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
  
+import type {
+  ISbStoriesParams} from '@storyblok/react';
 import {
   getStoryblokApi,
   useStoryblokState,
-  StoryblokComponent,
+  StoryblokComponent
 } from '@storyblok/react';
 import Layout from '~/components/Layout';
  
@@ -12,7 +14,7 @@ export const loader = async ({ params }) => {
   console.log(params);
   const slug = params.slug ?? 'home';
  
-  let sbParams = {
+  let sbParams: ISbStoriesParams = {
     version: 'draft',
   };
  

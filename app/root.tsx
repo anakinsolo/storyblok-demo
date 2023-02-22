@@ -1,4 +1,5 @@
-import type { MetaFunction } from '@remix-run/node';
+import stylesheet from './tailwind.css';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -14,8 +15,10 @@ import Hero from './components/Hero';
 import Page from './components/Page';
 import Teaser from './components/Teaser';
 
+console.log(process.env.API_TOKEN);
+
 storyblokInit({
-  accessToken: 'VaU1xW9KROy5MHltLZHiNwtt',
+  accessToken: process.env.API_TOKEN,
   use: [apiPlugin],
   components: {
     feature: Feature,
@@ -25,6 +28,10 @@ storyblokInit({
     hero: Hero
   },
 });
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: stylesheet },
+];
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
