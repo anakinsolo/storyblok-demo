@@ -6,6 +6,7 @@ import {
   useStoryblokState,
   StoryblokComponent,
 } from '@storyblok/react';
+import Layout from '~/components/Layout';
  
 export const loader = async ({ params }) => {
   console.log(params);
@@ -26,9 +27,8 @@ export default function Page() {
   story = useStoryblokState(story);
   console.log(story.content.body[0].headline);
   return (
-    <>
-      {story.content.body[0].headline}
+    <Layout>
       <StoryblokComponent blok={story.content} />
-    </>
+    </Layout>
   );
 }

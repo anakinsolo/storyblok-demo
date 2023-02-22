@@ -10,6 +10,7 @@ import {
 import { apiPlugin, storyblokInit } from '@storyblok/react';
 import Feature from './components/Feature';
 import Grid from './components/Grid';
+import Hero from './components/Hero';
 import Page from './components/Page';
 import Teaser from './components/Teaser';
 
@@ -21,6 +22,7 @@ storyblokInit({
     grid: Grid,
     teaser: Teaser,
     page: Page,
+    hero: Hero
   },
 });
 
