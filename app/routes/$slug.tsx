@@ -1,6 +1,5 @@
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
- 
 import type {ISbStoriesParams} from '@storyblok/react';
 import {
   getStoryblokApi,
