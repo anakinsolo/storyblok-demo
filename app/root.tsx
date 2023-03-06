@@ -18,19 +18,18 @@ import Teaser from './components/Teaser';
 import Footer from './components/Footer';
 import type { ReactNode } from 'react';
 import Navigation from './components/Menu/Navigation';
+import StoryblokServer from './services/Storyblok.server';
 
-storyblokInit({
-  accessToken: '',
-  use: [apiPlugin],
-  components: {
-    feature: Feature,
-    grid: Grid,
-    teaser: Teaser,
-    page: Page,
-    hero: Hero,
-    footer: Footer
-  },
-});
+const components = {
+  feature: Feature,
+  grid: Grid,
+  teaser: Teaser,
+  page: Page,
+  hero: Hero,
+  footer: Footer
+}
+
+StoryblokServer.initStoryblok(components);
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
