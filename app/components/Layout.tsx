@@ -1,12 +1,14 @@
 import Footer from './Footer';
-import Navigation from './Navigation';
+import Navigation from './Menu/Navigation';
 
-const Layout = ({ children }) => (
-  <div className='container mx-auto'>
-    <Navigation/>
-    <div>{children}</div>
-    <Footer/>
-  </div>
-);
+const Layout = ({ children }) => {
+  return (
+    <div>
+      <Navigation />
+      {children}
+      <Footer />
+    </div>
+  );
+};
 
 export default Layout;
