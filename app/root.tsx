@@ -1,5 +1,6 @@
 import stylesheet from './tailwind.css';
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -8,10 +9,20 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from '@remix-run/react';
 import Footer from './components/Footer';
 import type { ReactNode } from 'react';
 import Navigation from './components/Menu/Navigation';
+import { getStoryblokApi, storyblokInit } from '@storyblok/react';
+import StoryblokServer from './services/Storyblok.server';
+
+
+export const loader = async ({ params }: LoaderArgs) => {
+  StoryblokServer.initStoryblok();
+  let story = await StoryblokServer.getStory('menu/navigation');
+  return json(story);
+};
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
@@ -48,7 +59,7 @@ export function ErrorBoundary({ error }) {
   );
 }
 
-const MainStyles = ( {children} :{children: ReactNode}) => {
+const MainStyles = ( { children } :{children: ReactNode}) => {
   return (
     <html lang="en" className="h-full">
       <head>
@@ -66,9 +77,10 @@ const MainStyles = ( {children} :{children: ReactNode}) => {
 };
 
 export default function App() {
+  const story = useLoaderData<typeof loader>();
   return (
     <MainStyles>
-      <Navigation />
+      <Navigation story={story} />
       <Outlet />
       <Footer />
     </MainStyles>

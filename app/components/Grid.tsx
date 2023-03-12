@@ -1,13 +1,9 @@
-import { storyblokEditable, StoryblokComponent } from '@storyblok/react';
-
-const Grid = ({ blok }) => {
+const Grid = () => {
   return (
-    <ul {...storyblokEditable(blok)}>
-      {blok.columns.map((blok) => (
-        <li key={blok._uid}>
-          <StoryblokComponent blok={blok} />
-        </li>
-      ))}
+    <ul>
+      <li>
+        Grid component
+      </li>
     </ul>
   );
 };

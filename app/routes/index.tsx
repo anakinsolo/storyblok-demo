@@ -1,1 +1,6 @@
-export { default, loader } from './$slug';
+
+export default function Index() {
+  return (
+    <>Index</>
+  );
+}

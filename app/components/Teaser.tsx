@@ -1,9 +1,7 @@
-import { storyblokEditable } from '@storyblok/react';
- 
-const Teaser = ({ blok }) => {
+const Teaser = () => {
   return (
-    <div {...storyblokEditable(blok)} key={blok._uid}>
-      <h2> {blok.headline} </h2>
+    <div>
+      Teaser component
     </div>
   );
 };

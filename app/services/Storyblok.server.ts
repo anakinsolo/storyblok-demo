@@ -1,23 +1,25 @@
-import type { ISbStoriesParams} from '@storyblok/react';
+import type { ISbStoriesParams, StoryblokClient } from '@storyblok/js';
+import { storyblokInit, apiPlugin } from '@storyblok/js';
 
-import { apiPlugin, getStoryblokApi, storyblokInit } from '@storyblok/react';
-import { ComponentList } from '../components/ComponentList';
+let storyblokInstance: StoryblokClient = null;
 
-function initStoryblok () {
-  storyblokInit({
-    accessToken: '',
+const initStoryblok = () => {
+  const { storyblokApi } = storyblokInit({
+    accessToken: process.env.STORYBLOK_PREVIEW_TOKEN,
     use: [apiPlugin],
-    components: ComponentList,
   });
+
+  storyblokInstance = storyblokApi;
 };
 
-async function getStory(slug: string, isDraft?: boolean) {
-  initStoryblok();
+const getStory = async (slug: string, isDraft: boolean = true) => {
   let sbParams: ISbStoriesParams = {
     version: isDraft ? 'draft' : 'published',
   };
   
-  return await getStoryblokApi().get(`cdn/stories/${slug}`, sbParams);
-}
+  let { data } = await storyblokInstance.get(`cdn/stories/${slug}`, sbParams);
+  
+  return data?.story;
+};
 
-export default {initStoryblok, getStory};
+export default { initStoryblok,getStory };
